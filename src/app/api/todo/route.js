@@ -11,9 +11,11 @@ export async function POST(req) {
     });
 
     return NextResponse.json({ status: 201, data: newTodo });
-    
   } catch (error) {
-    console.error(error);
-    return NextResponse.json({ status: 500, message: "Internal Server Error" });
+    console.error("Error deleting todo:", error);
+    return NextResponse.json({
+      status: 500,
+      message: error.message || "Internal Server Error",
+    });
   }
 }
