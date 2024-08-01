@@ -12,7 +12,7 @@ export async function POST(req) {
 
     return NextResponse.json({ status: 201, data: newTodo });
   } catch (error) {
-    console.error("Error deleting todo:", error);
+    console.error("Error posting todo:", error);
     return NextResponse.json({
       status: 500,
       message: error.message || "Internal Server Error",

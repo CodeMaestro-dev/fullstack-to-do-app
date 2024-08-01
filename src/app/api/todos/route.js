@@ -7,7 +7,7 @@ export async function GET(req) {
 
     return NextResponse.json({ status: 201, data: allTodos });
   } catch (error) {
-    console.error("Error deleting todo:", error);
+    console.error("Error getting todo:", error);
     return NextResponse.json({
       status: 500,
       message: error.message || "Internal Server Error",
