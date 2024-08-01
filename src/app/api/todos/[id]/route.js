@@ -26,7 +26,10 @@ export async function PATCH(req) {
 
     return NextResponse.json({ status: 200, data: updatedTodo });
   } catch (error) {
-    console.error(error);
-    return NextResponse.json({ status: 500, message: "Internal Server Error" });
+    console.error("Error editing todo:", error);
+    return NextResponse.json({
+      status: 500,
+      message: error.message || "Internal Server Error",
+    });
   }
 }
