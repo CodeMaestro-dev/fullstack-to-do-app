@@ -5,12 +5,17 @@ export const createTodo = createAsyncThunk(
   "todoOperations/create",
   async (todo) => {
     try {
-      const response = await axios.post("/api/todo", {
-        todo: todo,
-        headers: {
-          "Content-Type": "application/json",
+      const response = await axios.post(
+        "/api/todo",
+        {
+          todo: todo,
         },
-      });
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
       return response.data;
     } catch (error) {
       return error.message;
@@ -31,12 +36,17 @@ export const editTodo = createAsyncThunk(
   "todoOperations/edit",
   async (change) => {
     try {
-      const response = await axios.patch(`/api/todos/${change.editId}`, {
-        todo: change.editedValue,
-        headers: {
-          "Content-Type": "application/json",
+      const response = await axios.patch(
+        `/api/todos/${change.editId}`,
+        {
+          todo: change.editedValue,
         },
-      });
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
       return response.data;
     } catch (error) {
       return error.message;
