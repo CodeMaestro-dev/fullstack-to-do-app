@@ -4,6 +4,7 @@ import Todo from "@/model/todoModel";
 export async function POST(req) {
   try {
     const body = await req.json();
+    console.log(body);
     const newTodo = await Todo.create({
       todo: body.todo,
       completed: false,
