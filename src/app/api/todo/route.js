@@ -5,7 +5,6 @@ export async function POST(req) {
   try {
     const body = await req.json();
     const newTodo = await Todo.create({
-      uid: Date.now(),
       todo: body.todo,
       completed: false,
     });
