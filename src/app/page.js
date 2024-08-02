@@ -21,6 +21,7 @@ export default function Home() {
 
     if (response.status === 201) {
       showToast("Todo has been added successfully");
+      console.log(response.status)
     }
   }
 
