@@ -62,8 +62,8 @@ export default function Home() {
         onSubmit={handleSubmit}
       >
         <textarea
-          name=""
-          id=""
+          name="todo"
+          id="todo"
           className="bg-todo-light-black rounded-md h-[60px] text-white p-2"
           onInput={(e) => {
             setTodo(e.target.value);
