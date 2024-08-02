@@ -4,10 +4,13 @@ import Todo from "@/model/todoModel";
 export async function POST(req) {
   try {
     const body = await req.json();
-    const newTodo = await Todo.create({
+
+    const newTodo = new Todo({
       todo: body.todo,
       completed: false,
     });
+    
+    await newTodo.save();
 
     console.log(newTodo);
     return NextResponse.json({ status: 201, data: newTodo });
