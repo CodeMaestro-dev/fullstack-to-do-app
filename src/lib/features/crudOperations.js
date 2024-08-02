@@ -14,6 +14,7 @@ export const createTodo = createAsyncThunk(
           headers: {
             "Content-Type": "application/json",
           },
+          timeout: 20000,
         }
       );
       return response.data;
@@ -45,6 +46,7 @@ export const editTodo = createAsyncThunk(
           headers: {
             "Content-Type": "application/json",
           },
+          timeout: 20000,
         }
       );
       return response.data;
@@ -62,6 +64,7 @@ export const deleteTodo = createAsyncThunk(
         headers: {
           "Content-Type": "application/json",
         },
+        timeout: 20000,
       });
       return response.data;
     } catch (error) {
