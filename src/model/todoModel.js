@@ -2,7 +2,6 @@ import mongoose from "mongoose";
 
 const todoSchema = new mongoose.Schema(
   {
-    uid: { type: Number, required: true },
     todo: { type: String, required: true },
     completed: { type: Boolean, required: true },
   },
