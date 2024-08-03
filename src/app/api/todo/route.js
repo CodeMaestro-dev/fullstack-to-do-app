@@ -10,7 +10,19 @@ export async function POST(req) {
       completed: false,
     });
 
+    const alreadyExisiting = await Todo.findOne({
+      todo: body.todo,
+    });
+
+    if (alreadyExisiting) {
+      return NextResponse.json({
+        status: 400,
+        error: "This todo already exists",
+      });
+    }
+
     console.log(newTodo);
+
     await newTodo.save();
 
     return NextResponse.json({ status: 201, data: newTodo });
