@@ -24,7 +24,7 @@ export const createTodo = createAsyncThunk(
   }
 );
 
-export const getTodo = createAsyncThunk("todoOperations/get", async (todo) => {
+export const getTodo = createAsyncThunk("todoOperations/get", async () => {
   try {
     const response = await axios.get("/api/todos");
     return response.data;

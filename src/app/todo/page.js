@@ -17,6 +17,7 @@ export default function AddTodo() {
   const [editId, setEditId] = useState("");
   const dispatch = useDispatch();
   const { status, error, todoItems, response } = useSelector(todos);
+
   useEffect(() => {
     dispatch(getTodo());
   }, [dispatch]);
@@ -72,7 +73,6 @@ export default function AddTodo() {
 
   function handleComplete(e) {
     dispatch(completeTodo(e.target.closest("li").id));
-    
 
     if (response.status === 200) {
       showToast("Todo marked as completed successfully");
@@ -85,7 +85,7 @@ export default function AddTodo() {
 
   function showToast(toastMessage) {
     StartToastifyInstance({
-      text: toastMessage ,
+      text: toastMessage,
       className: "fixed z-20 p-4 top-5 right-5 flex gap-3 text-white",
       duration: 3000,
       destination: "https://github.com/apvarun/toastify-js",
@@ -184,7 +184,9 @@ export default function AddTodo() {
             />
           ))
         ) : (
-          <p className="text-white text-center my-5 text-2xl">There aren&apos;t any todos yet</p>
+          <p className="text-white text-center my-5 text-2xl">
+            There aren&apos;t any todos yet
+          </p>
         )}
       </ul>
     </main>

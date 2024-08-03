@@ -18,8 +18,6 @@ export async function POST(req) {
     // Ensure database connection is ready
     if (mongoose.connection.readyState !== 1) {
       await mongoose.connect(process.env.MONGODB_URI, {
-        useNewUrlParser: true,
-        useUnifiedTopology: true,
         serverSelectionTimeoutMS: 5000, // 5 seconds timeout
       });
     }
