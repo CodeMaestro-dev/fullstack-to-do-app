@@ -1,7 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import Todo from "@/model/todoModel";
 import mongoose from "mongoose";
-import { connectToMongoDB } from "@/lib/db";
 
 export async function GET(req) {
   try {
@@ -11,7 +10,7 @@ export async function GET(req) {
       });
     }
 
-    const allTodos = await Todo.find();
+    const allTodos = await Todo.find({});
 
     return NextResponse.json({ status: 200, data: allTodos });
   } catch (error) {
