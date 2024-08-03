@@ -106,7 +106,6 @@ const crudOperations = createSlice({
       .addCase(createTodo.fulfilled, (state, action) => {
         state.status = "succeeded";
         state.response = action.payload;
-        state.todoItems.data.push(action.payload);
       })
       .addCase(createTodo.rejected, (state, action) => {
         state.status = "failed";
