@@ -1,0 +1,13 @@
+{
+  "version": 2,
+  "routes": [
+    {
+      "src": "/api/todos",
+      "dest": "/api/todos",
+      "methods": ["GET"],
+      "cache": {
+        "enabled": false
+      }
+    }
+  ]
+}

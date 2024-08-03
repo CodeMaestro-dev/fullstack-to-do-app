@@ -20,7 +20,7 @@ export async function GET(req) {
     const response = NextResponse.json({ status: 200, data: allTodos });
 
     // Disable caching
-    response.headers.append("Cache-Control", "no-store, must-revalidate");
+    response.headers.set("Cache-Control", "no-store, must-revalidate");
 
     return response;
   } catch (error) {
