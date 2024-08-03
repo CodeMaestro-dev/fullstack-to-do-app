@@ -5,12 +5,11 @@ import mongoose from "mongoose";
 export async function GET(req) {
   try {
     // Ensure database connection is ready
-    console.log(mongoose.connection.readyState);
-    if (mongoose.connection.readyState !== 1) {
-      await mongoose.connect(process.env.MONGODB_URI, {
-        serverSelectionTimeoutMS: 5000, // 5 seconds timeout
-      });
-    }
+    // if (mongoose.connection.readyState !== 1) {
+    //   await mongoose.connect(process.env.MONGODB_URI, {
+    //     serverSelectionTimeoutMS: 5000, // 5 seconds timeout
+    //   });
+    // }
 
     // Fetch all todos from the database
     const allTodos = await Todo.find();
