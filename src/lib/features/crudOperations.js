@@ -128,6 +128,13 @@ const crudOperations = createSlice({
       .addCase(editTodo.fulfilled, (state, action) => {
         state.status = "succeeded";
         state.response = action.payload;
+        // Update todoItems after successful edit:
+        const index = state.todoItems.data.findIndex(
+          (todo) => todo._id === action.meta.arg.editId
+        );
+        if (index !== -1) {
+          state.todoItems.data[index].todo = action.meta.arg.editedValue;
+        }
       })
       .addCase(editTodo.rejected, (state, action) => {
         state.status = "failed";
@@ -139,6 +146,10 @@ const crudOperations = createSlice({
       .addCase(deleteTodo.fulfilled, (state, action) => {
         state.status = "succeeded";
         state.response = action.payload;
+        // Update todoItems after successful delete:
+        state.todoItems.data = state.todoItems.data.filter(
+          (todo) => todo._id !== action.meta.arg
+        );
       })
       .addCase(deleteTodo.rejected, (state, action) => {
         state.status = "failed";
@@ -150,6 +161,14 @@ const crudOperations = createSlice({
       .addCase(completeTodo.fulfilled, (state, action) => {
         state.status = "succeeded";
         state.response = action.payload;
+        // Update todoItems after successful completion:
+        const index = state.todoItems.data.findIndex(
+          (todo) => todo._id === action.meta.arg
+        );
+        if (index !== -1) {
+          state.todoItems.data[index].completed =
+            !state.todoItems.data[index].completed;
+        }
       })
       .addCase(completeTodo.rejected, (state, action) => {
         state.status = "failed";
