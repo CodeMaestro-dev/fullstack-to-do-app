@@ -22,6 +22,10 @@ export default function Home() {
     if (response.status === 201) {
       showToast("Todo has been added successfully");
     }
+
+    if (response.status === 400) {
+      showErrorToast(response.error );
+    }
   }
 
   function showToast(toastMessage) {

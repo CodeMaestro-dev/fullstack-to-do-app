@@ -9,10 +9,10 @@ export async function POST(req) {
       todo: body.todo,
       completed: false,
     });
-    
-    await newTodo.save();
 
     console.log(newTodo);
+    await newTodo.save();
+
     return NextResponse.json({ status: 201, data: newTodo });
   } catch (error) {
     console.error("Error posting todo:", error);

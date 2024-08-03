@@ -164,7 +164,7 @@ export default function AddTodo() {
         <span className="text-todo-green">&apos;Completed&apos;</span>
       </p>
       <ul className="flex flex-col gap-5">
-        {todoItems && todoItems.lenght != 0 ? (
+        {todoItems && todoItems.data.length != 0 ? (
           todoItems.data.map((todo, index) => (
             <Todo
               key={index}
@@ -184,7 +184,7 @@ export default function AddTodo() {
             />
           ))
         ) : (
-          <p className="text-white">There aren&apos;t any todos yet</p>
+          <p className="text-white text-center my-5 text-2xl">There aren&apos;t any todos yet</p>
         )}
       </ul>
     </main>
