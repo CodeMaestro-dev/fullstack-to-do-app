@@ -20,7 +20,6 @@ export default function AddTodo() {
 
   useEffect(() => {
     dispatch(getTodo());
-    console.log("called")
   }, [dispatch]);
 
   if (status === "loading" || status === "idle") {

@@ -4,23 +4,15 @@ import mongoose from "mongoose";
 
 export async function GET(req) {
   try {
-    // Ensure database connection is ready
     if (mongoose.connection.readyState !== 1) {
       await mongoose.connect(process.env.MONGODB_URI, {
-        serverSelectionTimeoutMS: 5000, // 5 seconds timeout
+        serverSelectionTimeoutMS: 5000,
       });
     }
 
-    // Fetch all todos from the database
     const allTodos = await Todo.find();
 
-    // Return the list of todos
-    const response = NextResponse.json({ status: 200, data: allTodos });
-
-    // Disable caching
-    response.headers.set("Cache-Control", "no-store, must-revalidate");
-
-    return response;
+    return NextResponse.json({ status: 200, data: allTodos });
   } catch (error) {
     console.error("Error getting todos:", error);
     return NextResponse.json({
