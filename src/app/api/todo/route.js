@@ -1,36 +1,55 @@
 import { NextRequest, NextResponse } from "next/server";
 import Todo from "@/model/todoModel";
+import mongoose from "mongoose";
 
 export async function POST(req) {
   try {
+    // Parse the request body
     const body = await req.json();
 
-    const newTodo = new Todo({
-      todo: body.todo,
-      completed: false,
-    });
+    // Basic validation
+    if (!body.todo || typeof body.todo !== "string") {
+      return NextResponse.json({
+        status: 400,
+        error: "Invalid input: 'todo' is required and should be a string",
+      });
+    }
 
-    const alreadyExisiting = await Todo.findOne({
-      todo: body.todo,
-    });
+    // Ensure database connection is ready
+    if (mongoose.connection.readyState !== 1) {
+      await mongoose.connect(process.env.MONGODB_URI, {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+        serverSelectionTimeoutMS: 5000, // 5 seconds timeout
+      });
+    }
 
-    if (alreadyExisiting) {
+    // Check for existing todo
+    const alreadyExisting = await Todo.findOne({ todo: body.todo });
+
+    if (alreadyExisting) {
       return NextResponse.json({
         status: 400,
         error: "This todo already exists",
       });
     }
 
-    console.log(newTodo);
+    // Create a new Todo instance
+    const newTodo = new Todo({
+      todo: body.todo,
+      completed: false,
+    });
 
+    // Save the new Todo
     await newTodo.save();
 
+    // Return a successful response
     return NextResponse.json({ status: 201, data: newTodo });
   } catch (error) {
-    console.error("Error posting todo:", error);
+    console.error("Error posting todo:", error.message);
     return NextResponse.json({
       status: 500,
-      message: error.message || "Internal Server Error",
+      error: error.message || "Internal Server Error",
     });
   }
 }
