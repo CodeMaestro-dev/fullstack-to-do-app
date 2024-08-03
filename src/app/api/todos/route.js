@@ -3,11 +3,20 @@ import Todo from "@/model/todoModel";
 
 export async function GET(req) {
   try {
+    // Fetch all todos from the database
     const allTodos = await Todo.find();
 
-    return NextResponse.json({ status: 201, data: allTodos });
+    // Disable caching by setting appropriate headers
+    const response = NextResponse.json({
+      status: 200,
+      data: allTodos,
+    });
+
+    response.headers.append("Cache-Control", "no-store, must-revalidate");
+
+    return response;
   } catch (error) {
-    console.error("Error getting todo:", error);
+    console.error("Error getting todos:", error);
     return NextResponse.json({
       status: 500,
       message: error.message || "Internal Server Error",
