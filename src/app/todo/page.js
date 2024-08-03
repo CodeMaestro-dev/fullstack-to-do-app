@@ -22,12 +22,6 @@ export default function AddTodo() {
     dispatch(getTodo());
   }, [dispatch]);
 
-  useEffect(() => {
-    if (status === "succeeded") {
-      dispatch(getTodo()); // Refetch todos after a successful operation
-    }
-  }, [status, dispatch]);
-
   if (status === "loading" || status === "idle") {
     return (
       <div className="p-8">
@@ -56,6 +50,7 @@ export default function AddTodo() {
   function handleSubmit(e) {
     e.preventDefault();
     dispatch(editTodo({ editedValue, editId }));
+    setModalOpen(false);
     if (response.status === 200) {
       showToast("Todo edited successfully");
     }
