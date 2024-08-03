@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import Todo from "@/model/todoModel";
+import mongoose from "mongoose";
 
 export async function DELETE(req) {
   try {
