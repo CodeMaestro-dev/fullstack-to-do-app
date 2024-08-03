@@ -14,7 +14,7 @@ export async function GET(req) {
     // Fetch all todos from the database
     const allTodos = await Todo.find();
 
-    console.log(allTodos)
+    console.log(allTodos);
 
     // Return the list of todos
     const response = NextResponse.json({ status: 200, data: allTodos });
