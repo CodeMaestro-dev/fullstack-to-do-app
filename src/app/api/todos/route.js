@@ -1,9 +1,12 @@
 import { NextRequest, NextResponse } from "next/server";
 import Todo from "@/model/todoModel";
 import mongoose from "mongoose";
+import { connectToMongoDB } from "@/lib/db";
 
 export async function GET(req) {
   try {
+    await connectToMongoDB();
+    
     if (mongoose.connection.readyState !== 1) {
       await mongoose.connect(process.env.MONGODB_URI, {
         serverSelectionTimeoutMS: 5000,
