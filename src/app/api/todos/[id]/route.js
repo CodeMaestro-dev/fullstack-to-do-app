@@ -11,11 +11,27 @@ export async function PATCH(req) {
 
     const body = await req.json();
 
+    // Validate the request body
+    if (body.todo === undefined) {
+      return NextResponse.json({
+        status: 400,
+        message: "Invalid input: 'todo' or 'completed' is required",
+      });
+    }
+
+    // Ensure database connection is ready
+    if (mongoose.connection.readyState !== 1) {
+      await mongoose.connect(process.env.MONGODB_URI, {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+        serverSelectionTimeoutMS: 5000, // 5 seconds timeout
+      });
+    }
+
     const updatedTodo = await Todo.findByIdAndUpdate(
       id,
       {
-        todo: body?.todo,
-        completed: body?.completed,
+        todo: body.todo,
       },
       { new: true }
     );

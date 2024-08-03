@@ -9,6 +9,15 @@ export async function PATCH(req) {
       return NextResponse.json({ status: 400, message: "ID is required" });
     }
 
+    // Ensure database connection is ready
+    if (mongoose.connection.readyState !== 1) {
+      await mongoose.connect(process.env.MONGODB_URI, {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+        serverSelectionTimeoutMS: 5000, // 5 seconds timeout
+      });
+    }
+
     const completeTodo = await Todo.findByIdAndUpdate(
       id,
       {
