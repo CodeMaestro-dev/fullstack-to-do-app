@@ -92,7 +92,7 @@ export const completeTodo = createAsyncThunk(
 const crudOperations = createSlice({
   name: "crudTodo",
   initialState: {
-    todoItems: null,
+    todoItems: [],
     status: "idle",
     error: null,
     response: "none",
@@ -105,6 +105,7 @@ const crudOperations = createSlice({
       })
       .addCase(createTodo.fulfilled, (state, action) => {
         state.status = "succeeded";
+        state.todoItems.push(action.payload.data);
         state.response = action.payload;
       })
       .addCase(createTodo.rejected, (state, action) => {
